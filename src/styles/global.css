@@ -1,0 +1,46 @@
+@font-face {
+    font-family: 'DynaPuff';
+    font-style: normal;
+    font-weight: 500;
+    src: url('/fonts/DynaPuff.ttf'); 
+}
+
+@font-face {
+    font-family: 'NationalPark';
+    font-style: normal;
+    font-weight: 500;
+    src: url('/fonts/NationalPark.ttf'); 
+}
+
+html, body {
+    height: 94vh;
+  margin: 0;
+  padding: 0;
+}
+body {
+  background-image: url(/assets/background.svg);
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center;
+}
+
+.mainTitle {
+  font-family: 'DynaPuff';
+  color: #333;
+  text-align: center;
+  margin-top: 50px;
+  max-width: 40%;
+  align-self: center;
+  justify-self: center;
+}
+
+.mainTitle p {
+    font-family: "NationalPark";
+}
+
+.limitedItems {
+  font-family: 'DynaPuff';
+  color: #333;
+  width: fit-content;
+}
+
