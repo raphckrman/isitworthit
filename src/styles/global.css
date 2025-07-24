@@ -13,15 +13,20 @@
 }
 
 html, body {
-    height: 94vh;
+  min-height: 100%;
   margin: 0;
   padding: 0;
 }
-body {
+
+html {
   background-image: url(/assets/background.svg);
   background-size: cover;
   background-repeat: no-repeat;
   background-position: center;
+}
+
+body {
+  background: transparent;
 }
 
 .mainTitle {

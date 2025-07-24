@@ -14,13 +14,13 @@
         <div class="list">
             <!-- svelte-ignore element_invalid_self_closing_tag -->
             <div class="space" />
-
+<LimitedItem percentage={87} itemLeft={3} shells={110} item={"sketch from msw"} description={"Personal drawing by a staff member here at HQ"} image={"https://summer.hackclub.com/rails/active_storage/representations/redirect/eyJfcmFpbHMiOnsiZGF0YSI6MTc5NSwicHVyIjoiYmxvYl9pZCJ9fQ==--937db7bb5d3227260b1d3a9594c6837f62c25f07/eyJfcmFpbHMiOnsiZGF0YSI6eyJmb3JtYXQiOiJwbmciLCJyZXNpemVfdG9fbGltaXQiOlsyNTYsMjU2XX0sInB1ciI6InZhcmlhdGlvbiJ9fQ==--69edd5fc8f56201b3f04f7560743d8fad0d8d976/2025_06_18_0ll_Kleki.png"} />
             <div class="space" />
         </div>
     </div>
     <h2 style="padding-left: 5rem;">Others items</h2>
     <div class="otherItems">
-
+<LimitedItem percentage={87} itemLeft={3} shells={110} item={"sketch from msw"} description={"Personal drawing by a staff member here at HQ"} image={"https://summer.hackclub.com/rails/active_storage/representations/redirect/eyJfcmFpbHMiOnsiZGF0YSI6MTc5NSwicHVyIjoiYmxvYl9pZCJ9fQ==--937db7bb5d3227260b1d3a9594c6837f62c25f07/eyJfcmFpbHMiOnsiZGF0YSI6eyJmb3JtYXQiOiJwbmciLCJyZXNpemVfdG9fbGltaXQiOlsyNTYsMjU2XX0sInB1ciI6InZhcmlhdGlvbiJ9fQ==--69edd5fc8f56201b3f04f7560743d8fad0d8d976/2025_06_18_0ll_Kleki.png"} />
     </div>
 </div>
 
