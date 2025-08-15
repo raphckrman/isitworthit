@@ -39,6 +39,12 @@ body {
   justify-self: center;
 }
 
+@media (max-width: 480px) {
+  .mainTitle {
+    max-width: 90%;
+  }
+}
+
 .mainTitle p {
     font-family: "NationalPark";
 }

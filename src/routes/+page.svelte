@@ -1,4 +1,9 @@
 <script lang="ts">
+		let loading = true;
+		let step = "Fetching items directly from the SoM Shop";
+		import MediaQuery from "../components/MediaQuery.svelte";
+		const maxStep = 3;
+		let currentStep = 1;
     import { askToAI } from "../api/ai";
     import type { Item } from "../api/parser";
     import { getItems } from "../api/parser";
@@ -8,11 +13,16 @@
 
     (async () => {
         const data = await getItems();
+				step = "Analyzing Items with HackClub AI"
+				currentStep = 2;
         const updatedData = await askToAI(data);
         // @ts-ignore
         updatedData.sort((a, b) => b.ratio - a.ratio);
+				step = "Updating Items..."
+				currentStep = 3;
         items = updatedData;
         console.log(data)
+				loading = false
     })()
 </script>
 
@@ -22,42 +32,82 @@
 </div>
 
 <div class="limitedItems">
-    <h2 style="padding-left: 5rem;">Limited Items</h2>
+		<MediaQuery query="(max-width: 480px)" let:matches>
+			{#if !matches}
+				<h2 style="padding-left: 5rem;">Limited Items</h2>
+			{:else}
+				<h2 style="padding-left: 1.5rem;">Limited Items</h2>
+			{/if}
+		</MediaQuery>
     <div class="scrolllist">
         <div class="list">
             <!-- svelte-ignore element_invalid_self_closing_tag -->
-            <div class="space" />
-                {#each items as item}
-                    {#if item.illustration && item.qtyLeft && item.qtyLeft !== 0}
-                        <LimitedItem
-                            image={item.illustration}
-                            item={item.name}
-                            description={item.description}
-                            itemLeft={item.qtyLeft}
-                            shells={item.price}
-                            percentage={Math.floor(item.ratio! * 100)}
-                        />
-                    {/if}
-                {/each}
+						{#if loading}
+							<MediaQuery query="(max-width: 480px)" let:matches>
+								{#if !matches}
+									<div class="space" />
+								{:else}
+									<div class="mobile" />
+								{/if}
+							</MediaQuery>
+							<div class="loadContainer">
+								<p class="loading">Loading...</p>
+								<p>Current Step: {step} ({currentStep}/{maxStep})</p>
+							</div>
+						{/if}
+						<MediaQuery query="(max-width: 480px)" let:matches>
+							{#if !matches}
+								<div class="space" />
+							{:else}
+								<div class="mobile" />
+							{/if}
+						</MediaQuery>
+            
+						{#each items as item}
+								{#if item.illustration && item.qtyLeft && item.qtyLeft !== 0}
+										<LimitedItem
+												image={item.illustration}
+												item={item.name}
+												description={item.description}
+												itemLeft={item.qtyLeft}
+												shells={item.price}
+												percentage={Math.floor(item.ratio! * 100)}
+										/>
+								{/if}
+						{/each}
             <!-- svelte-ignore element_invalid_self_closing_tag -->
             <div class="space" />
         </div>
     </div>
-    <h2 style="padding-left: 5rem;">Others items</h2>
-    <div class="otherItems">
-        {#each items as item}
-            {#if item.illustration}
-                <LimitedItem
-                    image={item.illustration}
-                    item={item.name}
-                    description={item.description}
-                    itemLeft={item.qtyLeft}
-                    shells={item.price}
-                    percentage={Math.floor(item.ratio! * 100)}
-                />
-            {/if}
-        {/each}
-    </div>
+		<MediaQuery query="(max-width: 480px)" let:matches>
+			{#if !matches}
+				<h2 style="padding-left: 5rem;">Others Items</h2>
+			{:else}
+				<h2 style="padding-left: 1.5rem;">Others Items</h2>
+			{/if}
+		</MediaQuery>
+		<MediaQuery query="(max-width: 480px)" let:matches>
+			<div class="otherItems{matches ? ' mobile' : ''}">
+				{#if loading}
+					<div class="loadContainer">
+						<p class="loading">Loading...</p>
+						<p>Current Step: {step} ({currentStep}/{maxStep})</p>
+					</div>
+				{/if}
+				{#each items as item}
+					{#if item.illustration}
+						<LimitedItem
+							image={item.illustration}
+							item={item.name}
+							description={item.description}
+							itemLeft={item.qtyLeft}
+							shells={item.price}
+							percentage={Math.floor(item.ratio! * 100)}
+						/>
+					{/if}
+				{/each}
+			</div>
+		</MediaQuery>
 </div>
 
 <style>
@@ -93,4 +143,32 @@
         display: flex;
         gap: 10px;
     }
+
+		.loading {
+			animation: loading 1.5s linear infinite;
+		}
+
+		.loadContainer {
+			display: flex;
+			flex: 1;
+			flex-direction: column;
+		}
+
+		@keyframes loading {
+			0% {
+				opacity: 0.25;
+			}
+
+			50% {
+				opacity: 1;
+			}
+
+			100% {
+				opacity: 0.25;
+			}
+		}
+
+		.mobile {
+			padding-left: 1.5rem;
+		}
 </style>
