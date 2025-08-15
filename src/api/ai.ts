@@ -19,6 +19,10 @@ export async function askToAI(data: Item[]): Promise<Item[]> {
 			})
 	})
 
+	if (response.ok !== true) {
+		throw new Error("Skill Issue")
+	}
+
 	const responseJson = await response.json();
 		
 	try {

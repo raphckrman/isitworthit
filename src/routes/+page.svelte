@@ -15,7 +15,12 @@
         const data = await getItems();
 				step = "Analyzing Items with HackClub AI"
 				currentStep = 2;
-        const updatedData = await askToAI(data);
+				let updatedData = [...data];
+				try {
+					updatedData = await askToAI(data);
+				} catch (error) {
+					location.reload();
+				}
         // @ts-ignore
         updatedData.sort((a, b) => b.ratio - a.ratio);
 				step = "Updating Items..."
